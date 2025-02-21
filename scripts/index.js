@@ -1,8 +1,9 @@
-const grid        = document.querySelector("#grid");
-const sizeButton  = document.querySelector("#sizeButton");
-const randButton  = document.querySelector("#randButton");
-const inputButton = document.querySelector("#inputType");
-const eraseButton = document.querySelector("#eraseAll");
+const grid           = document.querySelector("#grid");
+const sizeButton     = document.querySelector("#sizeButton");
+const randButton     = document.querySelector("#randButton");
+const inputButton    = document.querySelector("#inputType");
+const eraseAllButton = document.querySelector("#eraseAllButton");
+const eraserButton   = document.querySelector("#eraserButton");
 
 function randomColors() {
     return Math.floor(Math.random() * 256);
@@ -34,6 +35,7 @@ function initBoxListeners(color = "black") {
 
 let colorMode = "default";
 function initButtonListeners(color = "black") {
+    const boxes = document.querySelectorAll(".box");
     sizeButton.addEventListener("click", () => {
        let size = Number(prompt("Enter a number between 10 and 100:"));
        if(size <= 100 && size >= 10 && size != "") {
@@ -44,7 +46,6 @@ function initButtonListeners(color = "black") {
     });    
 
     randButton.addEventListener("click", () => {
-        const boxes = document.querySelectorAll(".box");
         if(colorMode === "default") {
             boxes.forEach(box => box.addEventListener("mouseenter", () => {
                 box.style.backgroundColor = `rgb(${randomColors()} ${randomColors()} ${randomColors()})`;
@@ -56,8 +57,22 @@ function initButtonListeners(color = "black") {
         }
     });
 
-    eraseButton.addEventListener("click", () => {
+    eraseAllButton.addEventListener("click", () => {
         grid.childNodes.forEach(box => {box.style.backgroundColor = "inherit"});
+    });
+
+    eraserButton.addEventListener("click", () => {
+        if(colorMode != "white") {
+            boxes.forEach(box => box.addEventListener("mouseenter", () => {
+                box.style.backgroundColor = "white";
+            }));
+            eraserButton.style.opacity = "0.5";
+            colorMode = "white";
+        } else {
+            initBoxListeners();
+            eraserButton.style.opacity = "1";
+            colorMode = "default";
+        }
     });
 }
 
