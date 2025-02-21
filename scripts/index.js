@@ -32,15 +32,29 @@ function initBoxListeners(color = "black") {
     }));
 }
 
-function initButtonListeners() {
+let colorMode = "default";
+function initButtonListeners(color = "black") {
     sizeButton.addEventListener("click", () => {
-       let size = Number(prompt("Enter a number between 10 and 100: "));
+       let size = Number(prompt("Enter a number between 10 and 100:"));
        if(size <= 100 && size >= 10 && size != "") {
         grid.innerHTML = "";
         createGrid(size);
         initBoxListeners();
        }
     });    
+
+    randButton.addEventListener("click", () => {
+        const boxes = document.querySelectorAll(".box");
+        if(colorMode === "default") {
+            boxes.forEach(box => box.addEventListener("mouseenter", () => {
+                box.style.backgroundColor = `rgb(${randomColors()} ${randomColors()} ${randomColors()})`;
+            }));
+            colorMode = "rgb"
+        } else {
+            initBoxListeners();
+            colorMode = "default";
+        }
+    });
 
     eraseButton.addEventListener("click", () => {
         grid.childNodes.forEach(box => box.style.backgroundColor = "inherit")
