@@ -19,6 +19,8 @@ body{
 
 main{
     display: flex;
+    align-items: center;
+    justify-content: space-evenly;
     gap: 32px;
     height: 100vh;
 }
@@ -26,6 +28,31 @@ main{
 #grid{
     display: flex;
     flex-wrap: wrap;
+    height: 400px;
+    width: 400px;
+    background-color: white;
+}
+
+#controls{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+#controls input{
+    padding: 8px;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-family: inherit;
+    font-weight: 1000;
+    background-color: white;
+    transition: 0.3s linear all;
+}
+
+#controls input:hover{
+    transition: 0.3s linear all;
+    box-shadow: 0 0 10px grey;
 }
 
 header,footer{
@@ -35,4 +62,8 @@ header,footer{
     background-color: #D71C1C;
     color: #FFD700;
     padding: 18px;
+}
+
+header{
+    font-size: 24px;
 }
