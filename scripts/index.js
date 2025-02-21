@@ -9,8 +9,8 @@ function randomColors() {
 }
 
 function createGrid(size = 10) {
-    for(let i = 0; i < size; i++) {
-        for(let j = 0; j < size; j++) {
+    for(let rows = 0; rows < size; rows++) {
+        for(let columns = 0; columns < size; columns++) {
             const box = document.createElement("div");
             box.classList.add("box");
             box.style.cssText = `
@@ -28,7 +28,7 @@ function createGrid(size = 10) {
 function initBoxListeners(color = "black") {
     const boxes = document.querySelectorAll(".box");
     boxes.forEach(box => box.addEventListener("mouseenter", () => {
-        box.style.backgroundColor = `${color}`;
+        box.style.backgroundColor = `${color}`; 
     }));
 }
 
@@ -57,7 +57,7 @@ function initButtonListeners(color = "black") {
     });
 
     eraseButton.addEventListener("click", () => {
-        grid.childNodes.forEach(box => box.style.backgroundColor = "inherit")
+        grid.childNodes.forEach(box => {box.style.backgroundColor = "inherit"});
     });
 }
 
