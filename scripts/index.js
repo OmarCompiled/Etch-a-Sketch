@@ -15,8 +15,10 @@ function createGrid(size = 10) {
             box.classList.add("box");
             box.style.cssText = `
             border: 1px solid grey;
-            height: ${400/size}px;
-            width: ${400/size}px;
+            height: ${512/size}px;
+            width: ${512/size}px;
+            flex-grow:1;
+            flex-shrink: 0;
             `;
             grid.appendChild(box);
         }
@@ -25,7 +27,7 @@ function createGrid(size = 10) {
 
 function initBoxListeners(color = "black") {
     const boxes = document.querySelectorAll(".box");
-    boxes.forEach(box => box.addEventListener("mouseenter", function colorBox(color) {
+    boxes.forEach(box => box.addEventListener("mouseenter", () => {
         box.style.backgroundColor = `${color}`;
     }));
 }
@@ -38,16 +40,7 @@ function initButtonListeners() {
         createGrid(size);
         initBoxListeners();
        }
-    });
-
-    randButton.addEventListener("click", () => {
-        grid.childNodes.forEach(box => box.removeEventListener("mouseenter", colorBox));
-        grid.childNodes.forEach(box => box.addEventListener())
-    });
-
-    // inputButton.addEventListener("click", () => {
-        
-    // });
+    });    
 
     eraseButton.addEventListener("click", () => {
         grid.childNodes.forEach(box => box.style.backgroundColor = "inherit")

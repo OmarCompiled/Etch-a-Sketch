@@ -28,8 +28,9 @@ main{
 #grid{
     display: flex;
     flex-wrap: wrap;
-    height: 400px;
-    width: 400px;
+    overflow: hidden;
+    height: 32rem;
+    width: 32rem;
     background-color: white;
 }
 
