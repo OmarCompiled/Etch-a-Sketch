@@ -29,8 +29,8 @@ main{
     display: flex;
     flex-wrap: wrap;
     overflow: hidden;
-    height: 32rem;
-    width: 32rem;
+    height: 450px;
+    width: 450px;
     background-color: white;
 }
 

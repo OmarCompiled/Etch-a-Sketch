@@ -15,8 +15,8 @@ function createGrid(size = 10) {
             box.classList.add("box");
             box.style.cssText = `
             border: 1px solid grey;
-            height: ${512/size}px;
-            width: ${512/size}px;
+            height: ${450/size}px;
+            width: ${450/size}px;
             flex-grow:1;
             flex-shrink: 0;
             `;
