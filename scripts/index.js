@@ -30,22 +30,14 @@ function createGrid(size = 10) {
 
 function initBoxListeners(color = "black") {
     const boxes = grid.querySelectorAll(".box");
-    boxes.forEach(box => box.addEventListener("mouseenter", function colorBox() {
+    boxes.forEach(box => box.onmouseenter = () => {
         box.style.cssText += "transition: 0.1s linear all;";
         if(color === "rgb") {
             box.style.backgroundColor = `rgb(${randomColors()} ${randomColors()} ${randomColors()})`;    
         } else {
             box.style.backgroundColor = `${color}`;
         }
-    }));
-}
-
-function removeBoxListeners() {
-    const boxes = grid.querySelectorAll(".box");
-    boxes.forEach(box => box.removeEventListener("mouseenter", function colorBox() {
-        box.style.backgroundColor = `${color}`;
-        box.style.cssText += "transition: 0.1s linear all;";
-    }));
+    });
 }
 
 let colorMode = "default";
@@ -61,7 +53,6 @@ function initButtonListeners() {
     randButton.onclick = () => {
         if(colorMode != "rgb") {
             colorMode = "rgb";
-            removeBoxListeners();
             initBoxListeners("rgb");
         } else {
             colorMode = "default";
@@ -76,7 +67,6 @@ function initButtonListeners() {
     eraserButton.onclick = () => {
         if(colorMode != "white") {
             colorMode = "white";
-            removeBoxListeners();
             initBoxListeners(colorMode);
             eraserButton.style.opacity = "0.5";
         } else {
