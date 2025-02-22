@@ -61,7 +61,7 @@ function initButtonListeners() {
     };
 
     eraseAllButton.onclick = () => {
-        grid.childNodes.forEach(box => {box.style.backgroundColor = "inherit"});
+        boxes.forEach(box => {box.style.backgroundColor = "inherit"});
     };
 
     eraserButton.onclick = () => {
@@ -80,10 +80,3 @@ function initButtonListeners() {
 createGrid();
 initBoxListeners();
 initButtonListeners();
-
-
-
-
-
-
-
