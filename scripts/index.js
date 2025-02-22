@@ -10,6 +10,7 @@ function randomColors() {
 }
 
 function createGrid(size = 10) {
+    grid.innerHTML = "";
     for(let rows = 0; rows < size; rows++) {
         for(let columns = 0; columns < size; columns++) {
             const box = document.createElement("div");
@@ -24,54 +25,50 @@ function createGrid(size = 10) {
             grid.appendChild(box);
         }
     }
+    initBoxListeners();
 }
 
 function initBoxListeners(color = "black") {
     const boxes = grid.childNodes;
-    boxes.forEach(box => box.addEventListener("mouseenter", () => {
-        box.style.backgroundColor = `${color}`; 
-    }));
+    boxes.forEach(box => box.onmouseenter = () => {
+        box.style.backgroundColor = `${color}`;
+        box.style.cssText += "transition: 0.1s linear all;";
+    });
 }
 
 let colorMode = "default";
-function initButtonListeners(color = "black") {
+function initButtonListeners() {
     const boxes = grid.childNodes;
-    sizeButton.addEventListener("click", () => {
+    sizeButton.onclick = () => {
        let size = Number(prompt("Enter a number between 10 and 100:"));
        if(size <= 100 && size >= 10 && size != "") {
-        grid.innerHTML = "";
         createGrid(size);
-        initBoxListeners();
        }
-    });    
+    };
 
-    randButton.addEventListener("click", () => {
+    randButton.onclick = () => {
         if(colorMode === "default") {
-            boxes.forEach(box => box.addEventListener("mouseenter", () => {
-                box.style.backgroundColor = `rgb(${randomColors()} ${randomColors()} ${randomColors()})`;
-            }));
-            colorMode = "rgb"
-        } else {
+            colorMode = "rgb";
             initBoxListeners();
+        } else {
             colorMode = "default";
+            initBoxListeners();
         }
-    });
+    };
 
-    eraseAllButton.addEventListener("click", () => {
+    eraseAllButton.onclick = () => {
         grid.childNodes.forEach(box => {box.style.backgroundColor = "inherit"});
-    });
+    };
 
     eraserButton.onclick = () => {
         if(colorMode != "white") {
-            boxes.forEach(box => box.addEventListener("mouseenter", () => {
-                box.style.backgroundColor = "white";
-            }));
-            eraserButton.style.opacity = "0.5";
             colorMode = "white";
+            initBoxListeners(colorMode);
+            eraserButton.style.opacity = "0.5";
         } else {
+            colorMode = "default";
             initBoxListeners();
             eraserButton.style.opacity = "1";
-            colorMode = "default";
         }
     };
 }
