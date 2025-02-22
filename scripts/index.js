@@ -29,16 +29,28 @@ function createGrid(size = 10) {
 }
 
 function initBoxListeners(color = "black") {
-    const boxes = grid.childNodes;
-    boxes.forEach(box => box.onmouseenter = () => {
+    const boxes = grid.querySelectorAll(".box");
+    boxes.forEach(box => box.addEventListener("mouseenter", function colorBox() {
+        box.style.cssText += "transition: 0.1s linear all;";
+        if(color === "rgb") {
+            box.style.backgroundColor = `rgb(${randomColors()} ${randomColors()} ${randomColors()})`;    
+        } else {
+            box.style.backgroundColor = `${color}`;
+        }
+    }));
+}
+
+function removeBoxListeners() {
+    const boxes = grid.querySelectorAll(".box");
+    boxes.forEach(box => box.removeEventListener("mouseenter", function colorBox() {
         box.style.backgroundColor = `${color}`;
         box.style.cssText += "transition: 0.1s linear all;";
-    });
+    }));
 }
 
 let colorMode = "default";
 function initButtonListeners() {
-    const boxes = grid.childNodes;
+    const boxes = grid.querySelectorAll(".box");
     sizeButton.onclick = () => {
        let size = Number(prompt("Enter a number between 10 and 100:"));
        if(size <= 100 && size >= 10 && size != "") {
@@ -47,9 +59,10 @@ function initButtonListeners() {
     };
 
     randButton.onclick = () => {
-        if(colorMode === "default") {
+        if(colorMode != "rgb") {
             colorMode = "rgb";
-            initBoxListeners();
+            removeBoxListeners();
+            initBoxListeners("rgb");
         } else {
             colorMode = "default";
             initBoxListeners();
@@ -63,6 +76,7 @@ function initButtonListeners() {
     eraserButton.onclick = () => {
         if(colorMode != "white") {
             colorMode = "white";
+            removeBoxListeners();
             initBoxListeners(colorMode);
             eraserButton.style.opacity = "0.5";
         } else {
