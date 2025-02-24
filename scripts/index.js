@@ -9,7 +9,7 @@ function randomColors() {
     return Math.floor(Math.random() * 256);
 }
 
-function createGrid(size = 10) {
+function drawGrid(size = 10) {
     grid.innerHTML = "";
     for(let rows = 0; rows < size; rows++) {
         for(let columns = 0; columns < size; columns++) {
@@ -47,7 +47,7 @@ function initButtonListeners() {
     sizeButton.onclick = () => {
        let size = Number(prompt("Enter a number between 10 and 100:"));
        if(size <= 100 && size >= 10 && size != "") {
-        createGrid(size);
+        drawGrid(size);
        }
     };
 
@@ -78,4 +78,4 @@ function initButtonListeners() {
     };
 }
 
-createGrid();
+drawGrid();
