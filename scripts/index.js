@@ -41,6 +41,12 @@ function initBoxListeners(color = "black") {
     });
 }
 
+function toggleButtons(mode) {
+    sizeButton.disabled     = mode;
+    randButton.disabled     = mode;
+    eraseAllButton.disabled = mode;
+}
+
 let colorMode = "default";
 function initButtonListeners() {
     const boxes = grid.querySelectorAll(".box");
@@ -70,10 +76,12 @@ function initButtonListeners() {
             colorMode = "white";
             initBoxListeners(colorMode);
             eraserButton.style.opacity = "0.5";
+            toggleButtons(true);
         } else {
             colorMode = "default";
             initBoxListeners();
             eraserButton.style.opacity = "1";
+            toggleButtons(false);
         }
     };
 }
