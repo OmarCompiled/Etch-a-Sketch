@@ -49,6 +49,8 @@ main{
     font-weight: 1000;
     background-color: whitesmoke;
     transition: 0.3s linear all;
+    height: 50px;
+    width: 170px;
 }
 
 #controls input:hover{

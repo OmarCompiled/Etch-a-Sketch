@@ -61,9 +61,11 @@ function initButtonListeners() {
         if(colorMode != "rgb") {
             colorMode = "rgb";
             initBoxListeners("rgb");
+            randButton.value = "Black";
         } else {
             colorMode = "default";
             initBoxListeners();
+            randButton.value = "Randomize Colors";
         }
     };
 
